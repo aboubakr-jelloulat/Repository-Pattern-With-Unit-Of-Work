@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Book.Data\Book.Data.csproj" />
     <ProjectReference Include="..\Book.Models\Book.Models.csproj" />
   </ItemGroup>

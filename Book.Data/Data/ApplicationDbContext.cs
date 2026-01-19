@@ -42,6 +42,24 @@ public class ApplicationDbContext : DbContext
     public DbSet<Author> Authors { get; set; }
 
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        // Seed Authors
+        modelBuilder.Entity<Author>().HasData(
+            new Author { Id = 1, Name = "J.K. Rowling" },
+            new Author { Id = 2, Name = "J.R.R. Tolkien" }
+        );
+
+        // Seed Books
+        modelBuilder.Entity<Books>().HasData(
+            new Books { Id = 1, Title = "Harry Potter", Price = 20m, AuthorId = 1 },
+            new Books { Id = 2, Title = "LOTR", Price = 25m, AuthorId = 2 }
+        );
+    }
+
+
 
 }
 

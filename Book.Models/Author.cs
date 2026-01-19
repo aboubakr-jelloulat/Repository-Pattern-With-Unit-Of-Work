@@ -12,5 +12,6 @@ public class Author
 
     public required string Name { get; set; } = null!;
 
+    public ICollection<Books>? Books { get; set; }
 }
 

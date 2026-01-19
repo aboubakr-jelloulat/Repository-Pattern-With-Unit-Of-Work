@@ -14,6 +14,6 @@ public class Books
     public decimal Price { get; set; }
 
     public int AuthorId { get; set; }
-    public required Author Author { get; set; }
+    public  Author Author { get; set; }
 }
 

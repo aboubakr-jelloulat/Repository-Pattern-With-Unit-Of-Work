@@ -15,19 +15,12 @@ namespace Book.Data.Repository.Repositories
             _db = db;
             dbSet = _db.Set<T>();
         }
-        
 
-        public void Add(T entity)
-        {
-            dbSet.Add(entity);
-        }
 
-        public async Task AddAsync(T entity)
-        {
-            await dbSet.AddAsync(entity);
-        }
+        public void Add(T entity) => dbSet.Add(entity);
 
-       
+        public async Task AddAsync(T entity) => await dbSet.AddAsync(entity);
+
 
         public T? Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
         {
@@ -55,7 +48,7 @@ namespace Book.Data.Repository.Repositories
         {
             IQueryable<T> query = dbSet;
 
-            if (filter != null)
+            if (filter is not  null)
                 query = query.Where(filter);
 
             query = ApplyIncludes(query, includeProperties);
@@ -67,7 +60,7 @@ namespace Book.Data.Repository.Repositories
         {
             IQueryable<T> query = dbSet;
 
-            if (filter != null)
+            if (filter is not null)
                 query = query.Where(filter);
 
             query = ApplyIncludes(query, includeProperties);
@@ -75,29 +68,17 @@ namespace Book.Data.Repository.Repositories
             return await query.ToListAsync();
         }
 
-       
 
-        public void Remove(T entity)
-        {
-            dbSet.Remove(entity);
-        }
 
-        public async Task RemoveAsync(T entity)
-        {
-            await Task.Run(() => dbSet.Remove(entity));
-        }
+        public void Remove(T entity) => dbSet.Remove(entity);
 
-        public void RemoveRange(IEnumerable<T> entities)
-        {
-            dbSet.RemoveRange(entities);
-        }
+        public async Task RemoveAsync(T entity) => await Task.Run(() => dbSet.Remove(entity));
 
-        public async Task RemoveRangeAsync(IEnumerable<T> entities)
-        {
-            await Task.Run(() => dbSet.RemoveRange(entities));
-        }
+        public void RemoveRange(IEnumerable<T> entities) => dbSet.RemoveRange(entities);
 
-        
+        public async Task RemoveRangeAsync(IEnumerable<T> entities) => await Task.Run(() => dbSet.RemoveRange(entities));
+
+
 
         private static IQueryable<T> ApplyIncludes(IQueryable<T> query, string? includeProperties)
         {
