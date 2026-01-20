@@ -9,8 +9,8 @@ public class Author
     [Key]
     public int Id { get; set; }
 
-
-    public required string Name { get; set; } = null!;
+    [Required]
+    public string Name { get; set; } = null!;
 
     public ICollection<Books>? Books { get; set; }
 }

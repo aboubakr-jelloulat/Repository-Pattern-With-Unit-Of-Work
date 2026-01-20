@@ -10,10 +10,12 @@ public class Books
 {
     [Key]
     public int Id { get; set; }
-    public required string Title { get; set; } = null!;
+    
+    [Required]
+    public string Title { get; set; } = null!;
     public decimal Price { get; set; }
 
     public int AuthorId { get; set; }
-    public  Author Author { get; set; }
+    public Author? Author { get; set; }
 }
 

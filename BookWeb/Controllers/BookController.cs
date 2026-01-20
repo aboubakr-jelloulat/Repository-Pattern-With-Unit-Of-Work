@@ -17,7 +17,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(Books book)
+    public IActionResult Create([FromBody] Books book)
     {
         _unitOfWork.Book.Add(book);
         _unitOfWork.Save();
@@ -47,20 +47,24 @@ public class BookController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, Books updatedBook)
+    public IActionResult Update(int id, [FromBody] Books updatedBook)
     {
-        var book = _unitOfWork.Book.Get(b => b.Id == id, tracked: true); // tracked: true for update
-        if (book is null) 
-            return NotFound();
+        if (id != updatedBook.Id)
+            return BadRequest("ID mismatch");
 
+        var book = _unitOfWork.Book.Get(b => b.Id == id, tracked: true);
+        if (book is null)
+            return NotFound();
 
         book.Title = updatedBook.Title;
         book.Price = updatedBook.Price;
         book.AuthorId = updatedBook.AuthorId;
 
         _unitOfWork.Save();
-        return Ok(book);
+
+        return NoContent();
     }
+
 
 
     [HttpDelete("{id}")]

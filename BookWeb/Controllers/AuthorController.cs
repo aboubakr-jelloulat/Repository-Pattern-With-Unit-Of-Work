@@ -17,7 +17,7 @@ public class AuthorController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(Author author)
+    public IActionResult Create([FromBody] Author author)
     {
         _unitOfWork.Author.Add(author);
         _unitOfWork.Save();
@@ -46,7 +46,7 @@ public class AuthorController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, Author updatedAuthor)
+    public IActionResult Update(int id, [FromBody] Author updatedAuthor)
     {
         var author = _unitOfWork.Author.Get(a => a.Id == id, tracked: true); // tracked: true
         if (author is null) 
